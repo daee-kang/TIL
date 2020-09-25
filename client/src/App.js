@@ -14,7 +14,7 @@ function App() {
     const fetchData = async () => {
      const result = await api.get('http://localhost:5000/api/tabs')
      console.log(result.data)
-     await setTabs(result.data)
+     setTabs(result.data)
      setIsLoading(false)
     }
 

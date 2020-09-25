@@ -3,13 +3,14 @@ const Schema = mongoose.Schema;
 
 //create schema for todo
 const TabsSchema = new Schema({
+  _id: Schema.Types.ObjectId,
   name: {
-      type: String,
-      required: true
+    type: String,
+    required: true
   },
   pages: {
     type: [{
-        text: { type: String, required: true}
+      category: [{ type: String, required: true }]
     }],
     required: false,
   }

@@ -1,6 +1,7 @@
 const express = require ('express');
 const router = express.Router();
-const Tabs = require('../model/tabs')
+const Tabs = require('../model/tabs');
+const mongoose = require('mongoose');
 
 router.get('/tabs', (req, res, next) => {
   Tabs.find({})
@@ -9,13 +10,21 @@ router.get('/tabs', (req, res, next) => {
 })
 
 router.post('/tabs', (req, res, next) => {
-  if(req.body.pages) {
-    Tabs.create(req.body)
-    .then(data => res.json(data))
-    .catch(next)
-  } else {
-    res.json({error :shit})
-  }
+  const tab = new Tabs({
+    _id: new mongoose.Types.ObjectId(),
+    name: req.body.name,
+    pages: req.body.pages
+  })
+
+  tab.save()
+    .then((data) => {
+      console.log(data, `tab ${tab.name} saved`)
+      res.json(data)
+    })
+    .catch(err => {
+      console.log(err)
+      res.json(err)
+    })
 })
 
   module.exports = router;
