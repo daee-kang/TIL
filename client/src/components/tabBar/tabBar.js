@@ -6,9 +6,9 @@ const TabBar = (props) => {
         <div id="tabbar" className={`${props.sidebar ? "open" : "closed"}`}>
             {props.data.map(x => {
                 let elems = []
-                elems.push(<a href="#" className="tab-item"> {x.name} </a>)
+                elems.push(<a href="#" className="sidebar-item tab-item"> {x.name} </a>)
                 x.pages.map(y => {
-                    elems.push(<a href="#" className="category-item">{y.category}</a>)
+                    elems.push(<a href="#" className="sidebar-item category-item">{y.category}</a>)
                 })
 
                 return <div>{elems}</div>

@@ -12,15 +12,6 @@
     border-right: 1px solid #eaecef;
     border-top: 1px solid #eaecef;
     top: 56px;
-
-    &.a {
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
-    }
 }
 
 .open {
@@ -29,4 +20,29 @@
 
 .closed {
     width: 0px !important;
+}
+
+.sidebar-item {
+    display: block;
+    text-align: left;
+    outline: none;
+    text-decoration: none;
+}
+
+.tab-item {
+    font-weight: 600;
+    font-size: 22px;
+    color: black;
+}
+
+.category-item {
+    color: #2c3e50;
+
+    &:hover {
+        color: #3eaf7c;
+    }
+
+    &:active {
+        color: #3eaf7c;
+    }
 }

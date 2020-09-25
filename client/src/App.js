@@ -20,19 +20,21 @@ function App() {
      setIsLoading(false)
     }
 
+    //window event resize handler
+    const handleResize = () => {
+      if(window.innerWidth <= 680) {
+        setIsSidebarOpen(false)
+      } else {
+        setIsSidebarOpen(true)
+      }
+    }
+
     fetchData()
+    window.addEventListener('resize', handleResize)
   }, []);
 
   const openNav = () => {
-    let val = isSidebarOpen
-    if(val == true) {
-      val = false
-    } else {
-      val = true
-    }
-
-    console.log(val)
-    setIsSidebarOpen(val)
+    setIsSidebarOpen(!isSidebarOpen)
   }
 
   if(isLoading) return (
