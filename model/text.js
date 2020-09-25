@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 //create schema for todo
 const TextSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    parent: { type: Schema.Types.ObjectId, ref: 'tabs' },
+    category: { type: String, required: true },
+    page: { type: String, required: true },
     text: { type: String, required: true }
 })
 
