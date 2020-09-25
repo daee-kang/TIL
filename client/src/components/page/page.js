@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, createRef, useRef } from 'react'
 import api from '../../utils/api'
+import marked from 'marked'
 
 const Page = (props) =>{
     const { title, category } = props.match.params
@@ -8,8 +9,11 @@ const Page = (props) =>{
     useEffect(() => {
         const fetch = async () => {
             const res = await api.get(`http://localhost:5000/api/tabs/${category}/${title}`)
-            if(res.data != undefined)
-                setText(res.data.text)
+            if(res.data != undefined) {
+                let text= res.data.text
+                const innerhtml = marked(text)
+                setText(innerhtml)
+            }
             else setText("")
         }
 
@@ -19,8 +23,7 @@ const Page = (props) =>{
 
     return (
         <div>
-            <div>
-                { text }
+            <div dangerouslySetInnerHTML={{__html: text}}>
             </div>
         </div>
     )
