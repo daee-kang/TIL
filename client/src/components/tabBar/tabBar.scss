@@ -16,6 +16,10 @@
 
 .open {
     width: 320px !important;
+
+    @media screen and (max-width : 950px) {
+        width: 250px !important;
+      }
 }
 
 .closed {
@@ -33,6 +37,10 @@
     font-weight: 600;
     font-size: 22px;
     color: black;
+
+    @media screen and (max-width : 950px) {
+        font-size: 20px;
+      }
 }
 
 .category-item {
@@ -45,4 +53,8 @@
     &:active {
         color: #3eaf7c;
     }
+
+    @media screen and (max-width : 950px) {
+        font-size: 15px;
+      }
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import api from '../../utils/api'
 import marked from 'marked'
 import Editor from '../editor/editor'
+import './markdownDisplay.scss'
 
 const MarkdownDisplay = (props) => {
     const { title, category } = props
@@ -22,8 +23,8 @@ const MarkdownDisplay = (props) => {
     })
 
     return (
-        <div>
-            <div dangerouslySetInnerHTML={{__html: text}}>
+        <div id="md-body">
+            <div id="md-content" dangerouslySetInnerHTML={{__html: text}}>
             </div>
         </div>
     )
