@@ -1,30 +1,41 @@
-import React, { useState, useEffect, createRef, useRef } from 'react'
+import React, { useState, useEffect, createRef, useRef, useCallback } from 'react'
 import api from '../../utils/api'
 import marked from 'marked'
+import Editor from '../editor/editor'
+import MarkdownDisplay from '../markdownDisplay/markdownDisplay'
 
-const Page = (props) =>{
+const Page = (props) => {
     const { title, category } = props.match.params
-    const [text, setText] = useState("")
+    const [isEditing, setIsEditing] = useState(false)
 
-    useEffect(() => {
-        const fetch = async () => {
-            const res = await api.get(`http://localhost:5000/api/tabs/${category}/${title}`)
-            if(res.data != undefined) {
-                let text= res.data.text
-                const innerhtml = marked(text)
-                setText(innerhtml)
-            }
-            else setText("")
+    const handleEditButton = () => {
+        setIsEditing(!isEditing)
+    }
+
+    const goBackFromEditor = useCallback(() => {
+        setIsEditing(false)
+    }, [setIsEditing])
+
+    const getElem = () => {
+        if(isEditing) {
+            return (
+                <div>
+                    <Editor title={title} category={category} back={goBackFromEditor}/>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                <button onClick={handleEditButton}>dab</button>
+                    <MarkdownDisplay title={title} category={category} />
+                </div>
+            )
         }
-
-        fetch()
-    })
-
+    }
 
     return (
         <div>
-            <div dangerouslySetInnerHTML={{__html: text}}>
-            </div>
+            { getElem() }
         </div>
     )
 }

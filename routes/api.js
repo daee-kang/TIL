@@ -28,23 +28,25 @@ router.post('/tabs', (req, res, next) => {
     })
 })
 
-router.post('/tabs/test', (req, res, next) => {
-  const tab = new Text({
-    _id: new mongoose.Types.ObjectId(),
-    category: req.body.category,
-    page: req.body.page,
-    text: req.body.text
-  })
+router.post('/tabs/:category/:page', (req, res, next) => {
+  const { category, page } = req.params
+  console.log(res.body)
 
-  tab.save()
-    .then((data) => {
-      console.log(data, `tab ${tab.text} saved`)
-      res.json(data)
+  let text = req.body.text
+  if(text === undefined) {
+    text = ""
+  }
+
+  Text.updateOne({"category": category, "page": page}, 
+    {"category": category, "page": page, "text": text})
+    .then(val => {
+      res.json(val)
     })
     .catch(err => {
       console.log(err)
-      res.json(err)
-    })
+  })
+
+
 })
 
 router.get('/tabs/:category/:page', (req, res, next) => {
