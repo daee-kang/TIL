@@ -1,4 +1,4 @@
-const express = require ('express');
+const express = require('express');
 const router = express.Router();
 const Tabs = require('../model/tabs');
 const Text = require('../model/text')
@@ -28,32 +28,43 @@ router.post('/tabs', (req, res, next) => {
     })
 })
 
-router.post('/tabs/:category/:page', (req, res, next) => {
+router.post('/tabs/:category/:page', async (req, res, next) => {
   const { category, page } = req.params
-  console.log(res.body)
+  console.log(req.body)
 
   let text = req.body.text
-  if(text === undefined) {
+  if (text === undefined) {
     text = ""
   }
 
-  Text.updateOne({"category": category, "page": page}, 
-    {"category": category, "page": page, "text": text})
-    .then(val => {
-      res.json(val)
+  Text.findOne({ "category": category, "page": page }, (err, data) => {
+    if (data === null) {
+      data = new Text({
+        _id: new mongoose.Types.ObjectId(),
+        category: category,
+        page: page,
+        text: text
+      })
+    } else {
+      data["text"] = text
+    }
+
+    data.save((err) => {
+      if (err) {
+        res.send("err")
+      } else {
+        res.send(data)
+      }
+
     })
-    .catch(err => {
-      console.log(err)
-  })
-
-
+  });
 })
 
 router.get('/tabs/:category/:page', (req, res, next) => {
   const { category, page } = req.params
   console.log(category, page)
 
-  Text.findOne({"category": category, "page": page})
+  Text.findOne({ "category": category, "page": page })
     .then(results => {
       console.log(results)
       res.json(results)
@@ -64,4 +75,4 @@ router.get('/tabs/:category/:page', (req, res, next) => {
 
 })
 
-  module.exports = router;
+module.exports = router;
