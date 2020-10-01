@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Tabs = require('../model/tabs');
-const Text = require('../model/text')
+const { Category, Text } = require('../model/data');
 const mongoose = require('mongoose');
 const marked = require('marked')
 
@@ -17,22 +16,27 @@ marked.use({renderer})
 
 
 
-router.get('/tabs', (req, res, next) => {
-  Tabs.find({})
+router.get('/data', (req, res, next) => {
+  Category.find({})
     .then(data => res.json(data))
     .catch(next)
 })
 
-router.post('/tabs', (req, res, next) => {
-  const tab = new Tabs({
+router.post('/data', async (req, res, next) => {
+  const data = await Category.find({name: req.body.name})
+  if(data.length != 0) {
+    res.json("already exists")
+    return
+  }
+  
+  const category = new Category({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
-    pages: req.body.pages
   })
 
-  tab.save()
+  category.save()
     .then((data) => {
-      console.log(data, `tab ${tab.name} saved`)
+      console.log(data, `category ${data.name} saved`)
       res.json(data)
     })
     .catch(err => {
@@ -41,7 +45,7 @@ router.post('/tabs', (req, res, next) => {
     })
 })
 
-router.post('/tabs/:category/:page', async (req, res, next) => {
+router.post('/data/:category/:page', async (req, res, next) => {
   const { category, page } = req.params
   console.log(req.body)
 
@@ -49,6 +53,23 @@ router.post('/tabs/:category/:page', async (req, res, next) => {
   if (text === undefined) {
     text = ""
   }
+
+  Category.findOne({name: req.body.category})
+    .then(data => {
+      if(data === null) {
+        res.json("category doesn't exist")
+        return
+      }
+    })
+
+  Category.findOne({name: req.body.category, 'pages.name': req.body.name}, (err, data) => {
+    if(data === null) {
+      //we need to create page then 
+
+    } else {
+      //we are updating the page
+    }
+  })
 
   Text.findOne({ "category": category, "page": page }, (err, data) => {
     if (data === null) {
