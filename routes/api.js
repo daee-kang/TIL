@@ -3,6 +3,19 @@ const router = express.Router();
 const Tabs = require('../model/tabs');
 const Text = require('../model/text')
 const mongoose = require('mongoose');
+const marked = require('marked')
+
+//---------------------------------------------------------------------------------
+/* override marked renderer to match client side (dumbed down) */
+const renderer = {
+  heading(text, level) {
+      return `<h${level} class="marked" id="blahblahblah">${text}</h${level}>`;
+  }
+};
+marked.use({renderer})
+//---------------------------------------------------------------------------------
+
+
 
 router.get('/tabs', (req, res, next) => {
   Tabs.find({})
@@ -72,7 +85,33 @@ router.get('/tabs/:category/:page', (req, res, next) => {
     .catch(err => {
       console.log(err)
     })
+})
 
+router.get('/tabs/allHeaders', (req, res, next) => {
+  
+  Text.find({}, (err, texts) => {
+    let userMap = {}
+
+    texts.forEach(t => {
+      let markedText = marked(t.text)
+      console.log(markedText)
+      const regExpr = /<h[12] class=\"marked\" [^>]+>(.*?)<\/h[12]>/g 
+      //const regExpr = /<h[12] [^>]+>(.*?)<\/h[12]>/g
+
+      let m
+      let regArray = []
+      do{
+        m = regExpr.exec(markedText)
+        if(m) {
+          regArray.push(m[1])
+        }
+      } while(m)
+
+      userMap[t._id] = regArray
+    })
+
+    res.send(userMap)
+  })
 })
 
 module.exports = router;
