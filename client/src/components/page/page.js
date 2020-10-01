@@ -3,6 +3,7 @@ import api from '../../utils/api'
 import marked from 'marked'
 import Editor from '../editor/editor'
 import MarkdownDisplay from '../markdownDisplay/markdownDisplay'
+import './page.scss'
 
 const Page = (props) => {
     const { title, category } = props.match.params
@@ -40,7 +41,7 @@ const Page = (props) => {
     }
 
     return (
-        <div>
+        <div id="page">
             { getElem() }
         </div>
     )
