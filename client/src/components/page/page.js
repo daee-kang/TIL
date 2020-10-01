@@ -1,17 +1,21 @@
-import React, { useState, useEffect, createRef, useRef, useCallback } from 'react'
+import React, { useState, useEffect, createRef, useRef, useCallback, useContext } from 'react'
 import api from '../../utils/api'
 import marked from 'marked'
 import Editor from '../editor/editor'
 import MarkdownDisplay from '../markdownDisplay/markdownDisplay'
 import './page.scss'
+import { Context } from '../../Provider'
 
 const Page = (props) => {
+    const { updateActiveLink } = useContext(Context)
+
     const { title, category } = props.match.params
     const [isEditing, setIsEditing] = useState(false)
 
     //if we navigate to different link, reload our isEditing state
     //we are loading the "same" component so watch for props
-    useEffect(() =>{
+    useEffect(() => {
+        updateActiveLink(`/page/${category}/${title}`)
         setIsEditing(false)
     }, [title, category])
 

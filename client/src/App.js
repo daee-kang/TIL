@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './App.scss';
 import api from './utils/api'
 import { Route, Switch } from 'react-router-dom'
@@ -6,20 +6,22 @@ import Header from './header/header';
 import TabBar from './components/tabBar/tabBar';
 import Home from './components/home/home';
 import Page from './components/page/page';
-
+import { Context } from './Provider'
 
 function App() {
+  const { setUpdateState, updateTabItems } = useContext(Context)
+
   const [isLoading, setIsLoading] = useState(true)
   const [tabs, setTabs] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+
+  setUpdateState.current = setTabs
 
   //component did mount
   useEffect(() => {
     //get data on load
     const fetchData = async () => {
-      const result = await api.get('http://localhost:5000/api/tabs')
-      console.log(result.data)
-      setTabs(result.data)
+      await updateTabItems()
       setIsLoading(false)
     }
 
@@ -48,15 +50,15 @@ function App() {
   else
     return (
       <div className="App">
-        <Header />
-        <button onClick={openNav} className="openbtn">open</button>
-        <TabBar data={tabs} sidebar={isSidebarOpen} />
-        <div id="main">
-          <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/page/:category/:title" component={Page} />
-          </Switch>
-        </div>
+          <Header />
+          <button onClick={openNav} className="openbtn">open</button>
+          <TabBar data={tabs} sidebar={isSidebarOpen} />
+          <div id="main">
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/page/:category/:title" component={Page} />
+            </Switch>
+          </div>
       </div>
     );
 }
