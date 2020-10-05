@@ -47,51 +47,17 @@ router.post('/data', async (req, res, next) => {
 
 router.post('/data/:category/:page', async (req, res, next) => {
   const { category, page } = req.params
-  console.log(req.body)
+  console.log(category, page)
 
-  let text = req.body.text
-  if (text === undefined) {
-    text = ""
-  }
-
-  Category.findOne({name: req.body.category})
-    .then(data => {
-      if(data === null) {
-        res.json("category doesn't exist")
-        return
-      }
-    })
-
-  Category.findOne({name: req.body.category, 'pages.name': req.body.name}, (err, data) => {
-    if(data === null) {
-      //we need to create page then 
-
-    } else {
-      //we are updating the page
+  Category.updateOne({name: category}, {$addToSet: {
+    "pages": {
+      page: page,
+      text: ""
     }
+  }}, (err, data) => {
+    if(err) console.log(err) 
+    res.json(data)
   })
-
-  Text.findOne({ "category": category, "page": page }, (err, data) => {
-    if (data === null) {
-      data = new Text({
-        _id: new mongoose.Types.ObjectId(),
-        category: category,
-        page: page,
-        text: text
-      })
-    } else {
-      data["text"] = text
-    }
-
-    data.save((err) => {
-      if (err) {
-        res.send("err")
-      } else {
-        res.send(data)
-      }
-
-    })
-  });
 })
 
 router.get('/tabs/:category/:page', (req, res, next) => {
