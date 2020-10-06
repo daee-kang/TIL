@@ -1,14 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 #md-body {
-    overflow-y: auto;
 }
 
 #md-content {
     text-align: left;
-    width: 740px;
-    height: calc(100vw - 50px);
+    width: 720px;
     margin: auto;
 
     @media screen and (max-width : 1140px) {
         width: 100%;
     }
 }
+
+h1 {
+    font-family: 'Lobster', cursive;
+    color: #2c3e50;
+    font-weight: 500;
+    border-bottom: 17px solid #ffd816;
+    word-break: keep-all;
+    font-size: 4.5rem;
+}
+
+h2 {
+    margin-top: -50px;
+    padding-top: 70px;
+    font-weight: 600;
+    line-height: 1.25;
+
+    color: #2c3e50;
+    border-bottom: 1px solid #eaecef;
+}
+
+/* Dracula Theme v1.2.5
+ *
+ * https://github.com/dracula/highlightjs
+ *
+ * Copyright 2016-present, All rights reserved
+ *
+ * Code licensed under the MIT license
+ *
+ * @author Denis Ciccale <dciccale@gmail.com>
+ * @author Zeno Rocha <hi@zenorocha.com>
+ */
+
+ .hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #282a36;
+  }
+  
+  .hljs-built_in,
+  .hljs-selector-tag,
+  .hljs-section,
+  .hljs-link {
+    color: #8be9fd;
+  }
+  
+  .hljs-keyword {
+    color: #ff79c6;
+  }
+  
+  .hljs,
+  .hljs-subst {
+    color: #f8f8f2;
+  }
+  
+  .hljs-title {
+    color: #50fa7b;
+  }
+  
+  .hljs-string,
+  .hljs-meta,
+  .hljs-name,
+  .hljs-type,
+  .hljs-attr,
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-addition,
+  .hljs-variable,
+  .hljs-template-tag,
+  .hljs-template-variable {
+    color: #f1fa8c;
+  }
+  
+  .hljs-comment,
+  .hljs-quote,
+  .hljs-deletion {
+    color: #6272a4;
+  }
+  
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-title,
+  .hljs-section,
+  .hljs-doctag,
+  .hljs-type,
+  .hljs-name,
+  .hljs-strong {
+    font-weight: bold;
+  }
+  
+  .hljs-literal,
+  .hljs-number {
+    color: #bd93f9;
+  }
+  
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  
+  
+  pre code {
+    display: block;
+    background: #2d2d2d;
+    color: #cccccc;
+    font-family: Menlo, Monaco, Consolas, monospace;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    padding: 10px;
+    overflow-x: auto;
+  }

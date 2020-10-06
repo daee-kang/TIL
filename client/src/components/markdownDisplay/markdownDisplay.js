@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import api from '../../utils/api'
 import marked from 'marked'
 import Editor from '../editor/editor'
+import hljs from 'highlight.js'
 import './markdownDisplay.scss'
 
 const MarkdownDisplay = (props) => {
@@ -24,7 +25,17 @@ const MarkdownDisplay = (props) => {
             const res = await api.get(`http://localhost:5000/api/${category}/${title}`)
             if (res.data != undefined) {
                 let text = res.data.text
-                marked.use({ renderer })
+                marked.setOptions({
+                    highlight: function(code, language) {
+                        console.log(code, language)
+                        const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
+                        console.log(validLanguage)
+                        return hljs.highlight(validLanguage, code).value;
+                    },
+                    gfm: true,
+                    breaks: true
+                })
+                marked.use({renderer})
                 const innerhtml = marked(text)
                 setText(innerhtml)
             }
