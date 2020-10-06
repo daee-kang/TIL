@@ -115,8 +115,35 @@ router.get('/:category/:page', (req, res, next) => {
     })
 })
 
+router.get('/menuItems', (req, res, next) => {
+  Category.find({})
+  .then((data) => {
+    if(data === null) {
+      res.json([])
+      return
+    }
+
+    let out = []
+    data.forEach((category) => {
+      let outItem = {}
+      outItem.title = category.name
+
+      let outPages = []
+      category.pages.forEach(page => {
+        outPages.push(page.page)
+      })
+
+      outItem.pages = outPages
+
+      out.push(outItem)
+    })
+
+    res.json(out)
+  })
+  .catch(next)
+})
+
 router.get('/allHeaders', (req, res, next) => {
-  
   Text.find({}, (err, texts) => {
     let userMap = {}
 

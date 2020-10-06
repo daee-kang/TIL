@@ -18,6 +18,18 @@ must send body ->
 GET '/:category/:page' :
 returns pages text
 
+GET '/menuItems' :
+returns all titles/pages for use in side bar 
+returns data in format ->
+    [
+        {
+            "title": __________,
+            "pages": [
+                ___________,
+            ]
+        }
+    ]
+
 GET '/allHeaders' :
 returns all H1 and H2 headers from all pages in all categories 
 used for sidebar to navigate to 
