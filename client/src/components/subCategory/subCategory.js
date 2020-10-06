@@ -5,7 +5,6 @@ import { Context } from '../../Provider'
 
 const SubCategory = (props) => {
     const { setCurrentSubs, updateSubItems } = useContext(Context)
-
     const { to, category, name, selected } = props
     const [subs, setSubs] = useState([])
 
@@ -20,6 +19,11 @@ const SubCategory = (props) => {
         f()
     }, [selected])
 
+    const htmlDecode = (input) => {
+        var doc = new DOMParser().parseFromString(input, "text/html");
+        return doc.documentElement.textContent;
+      }
+
     return (
         <NavLink
             to={to}
@@ -30,7 +34,7 @@ const SubCategory = (props) => {
             <div>
                 {selected === to ? subs.map(x => {
                     return <div>
-                        {x}
+                        {htmlDecode(x)}
                     </div>
                 }) : null}
             </div>
