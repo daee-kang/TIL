@@ -16,6 +16,7 @@ marked.use({ renderer })
 
 //return all
 router.get('/', (req, res, next) => {
+  console.log('/')
   Category.find({})
     .then(data => res.json(data))
     .catch(next)
@@ -24,6 +25,7 @@ router.get('/', (req, res, next) => {
 //creates category
 router.post('/:category', async (req, res, next) => {
   const { category } = req.params
+  console.log(`POST /${category}`)
 
   const data = await Category.find({ name: category })
   if (data.length != 0) {
@@ -50,7 +52,7 @@ router.post('/:category', async (req, res, next) => {
 //add blank page to category
 router.post('/:category/:page', (req, res, next) => {
   const { category, page } = req.params
-  console.log(category, page)
+  console.log(`POST /${category}/${page}`)
 
   Category.updateOne({ name: category }, {
     $addToSet: {
@@ -68,9 +70,7 @@ router.post('/:category/:page', (req, res, next) => {
 //update page in category
 router.put('/:category/:page', (req, res, next) => {
   const { category, page } = req.params
-  console.log('puttINGGG')
-  console.log(category, page)
-  console.log(req.body.text)
+  console.log(`PUT /${category}/${page}`)
 
   Category.findOne({ name: category }, (err, data) => {
     if (data === null) {
@@ -99,7 +99,7 @@ router.put('/:category/:page', (req, res, next) => {
 //return page
 router.get('/:category/:page', (req, res, next) => {
   const { category, page } = req.params
-  console.log(category, page)
+  console.log(`GET /${category}/${page}`)
 
   Category.findOne({ name: category, "pages.page": page })
     .then(results => {
@@ -121,6 +121,7 @@ router.get('/:category/:page', (req, res, next) => {
 })
 
 router.get('/menuItems', (req, res, next) => {
+  console.log(`GET /menuItems`)
   Category.find({})
     .then((data) => {
       if (data === null) {
@@ -149,6 +150,7 @@ router.get('/menuItems', (req, res, next) => {
 })
 
 router.get('/allHeaders', (req, res, next) => {
+  console.log(`GET /allHeaders`)
   Text.find({}, (err, texts) => {
     let userMap = {}
 
@@ -176,6 +178,7 @@ router.get('/allHeaders', (req, res, next) => {
 
 router.get('/headers/:category/:page', (req, res, next) => {
   const { category, page } = req.params
+  console.log(`GET /headers/${category}/${page}`)
 
   Category.findOne({ name: category, "pages.page": page }, (err, data) => {
     if (err) {
@@ -188,13 +191,17 @@ router.get('/headers/:category/:page', (req, res, next) => {
       return
     }
 
-    data.pages.forEach((p) => {
+    for(let i = 0; i < data.pages.length; i++) {
+      let p = data.pages[i]
+
       if (p.page === page) {
+        if(p.text === null || p.text === "") {
+          res.json([])
+          return;
+        }
         let markedText = marked(p.text)
-        console.log(markedText)
         const regExpr = /<h[23] class=\"marked\" [^>]+>(.*?)<\/h[23]>/g
         //const regExpr = /<h[12] [^>]+>(.*?)<\/h[12]>/g
-
         let m
         let regArray = []
         do {
@@ -207,9 +214,9 @@ router.get('/headers/:category/:page', (req, res, next) => {
         res.json(regArray)
         return
       }
-    })
+    }
 
-    res.json('hmm')
+    res.json([])
   })
 })
 

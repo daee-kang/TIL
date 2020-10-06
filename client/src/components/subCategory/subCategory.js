@@ -6,24 +6,28 @@ import { Context } from '../../Provider'
 const SubCategory = (props) => {
     const { subItems, updateSubItems} = useContext(Context)
 
-    const { to, category, selected, db_id} = props
+    const { to, category, name, selected} = props
     const [child, setChild] = useState(<div>{category}</div>)
 
     useEffect(() => {
         const f = async () => {
             if(selected === to) {
-                await updateSubItems()
+                await updateSubItems(category, name)
                 console.log(subItems.current)
-                console.log(db_id)
-                //let subs = subItems.current[db_id]
                 setChild(
                     <div>
-                        {category}
-                        {/* {subs.map(x => {
+                        {name}
+                        {subItems.current.map(x => {
                             return <div>
                                 {x}
                             </div>
-                        })} */}
+                        })}
+                    </div>
+                )
+            } else {
+                setChild(
+                    <div>
+                        {name}
                     </div>
                 )
             }

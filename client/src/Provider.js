@@ -9,16 +9,17 @@ const Provider = ({children}) => {
     const tabItems = useRef()
     const setUpdateState = useRef()
     const updateTabItems = async () => {
-        const result = await api.get('http://localhost:5000/api/tabs')
+        const result = await api.get('http://localhost:5000/api/menuItems')
         console.log(result.data)
         setUpdateState.current(result.data)
     }
 
     const subItems = useRef()
-    const updateSubItems = async () => {
+    const updateSubItems = async (category, page) => {
         console.log('updated sub items')
-        const res = await api.get(`http://localhost:5000/api/tabs/allHeaders`)
+        const res = await api.get(`http://localhost:5000/api/headers/${category}/${page}`)
         if (res.data != undefined) {
+            console.log(res.data)
             subItems.current = res.data
         }
     }

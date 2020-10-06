@@ -16,16 +16,15 @@ const TabBar = (props) => {
         <div id="tabbar" className={`${props.sidebar ? "open" : "closed"}`}>
             {props.data.map(x => {
                 let elems = []
-                elems.push(<a href="#" key={x.name} className="sidebar-item tab-item"> {x.name} </a>)
-                x.pages.map(y => {
-                    const address = `/page/${x.name}/${y.category}`
+                elems.push(<a href="#" key={x.title} className="sidebar-item tab-item"> {x.title} </a>)
+                x.pages.map(page => {
+                    const address = `/page/${x.title}/${page}`
                     elems.push(
                         <SubCategory
-                            db_id={y._id}
                             selected={selected} 
                             to={address}
-                            name={x.name}
-                            category={y.category}
+                            name={page}
+                            category={x.title}
                         />
                     )
                 })

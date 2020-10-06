@@ -7,7 +7,7 @@ const Editor = (props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            const res = await api.get(`http://localhost:5000/api/tabs/${category}/${title}`)
+            const res = await api.get(`http://localhost:5000/api/${category}/${title}`)
             if(res.data != undefined) {
                 let text = res.data.text
                 setText(text)
@@ -25,7 +25,7 @@ const Editor = (props) => {
 
     const save = async (e) => {
         console.log(`sending ${text}`)
-        const res = await api.post(`http://localhost:5000/api/tabs/${category}/${title}`, { text })
+        const res = await api.put(`http://localhost:5000/api/${category}/${title}`, { text })
         console.log(res)
         back()
     }

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const TextSchema = new Schema({
     _id: Schema.Types.ObjectId,
     page: { type: String, required: true },
-    text: { type: String, required: true }
+    text: { type: String, required: false }
 })
 
 //create schema for todo

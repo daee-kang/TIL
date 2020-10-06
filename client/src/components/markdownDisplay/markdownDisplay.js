@@ -23,7 +23,7 @@ const MarkdownDisplay = (props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            const res = await api.get(`http://localhost:5000/api/tabs/${category}/${title}`)
+            const res = await api.get(`http://localhost:5000/api/${category}/${title}`)
             if (res.data != undefined) {
                 let text = res.data.text
                 marked.use({ renderer })
