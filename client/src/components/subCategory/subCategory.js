@@ -33,9 +33,9 @@ const SubCategory = (props) => {
             {name}
             <div>
                 {selected === to ? subs.map(x => {
-                    return <div>
+                    return <Link smooth to={`${to}#${x}`}>
                         {htmlDecode(x)}
-                    </div>
+                    </Link>
                 }) : null}
             </div>
         </NavLink>

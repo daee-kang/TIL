@@ -12,10 +12,8 @@ const MarkdownDisplay = (props) => {
     //allows us to put hash href on header
     const renderer = {
         heading(text, level) {
-            const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
-
             return `
-                  <h${level} class="marked" id="/page/${category}/${title}#${escapedText}">
+                  <h${level} class="marked" id="${text}">
                     ${text}
                   </h${level}>`;
         }
