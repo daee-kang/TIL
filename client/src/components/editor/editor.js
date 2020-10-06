@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import api from '../../utils/api'
+import { Context } from '../../Provider'
 
 const Editor = (props) => {
     const { title, category, back } = props
     const [text, setText] = useState("")
+    const { updateSubItems } = useContext(Context)
 
     useEffect(() => {
         const fetch = async () => {
@@ -26,6 +28,7 @@ const Editor = (props) => {
     const save = async (e) => {
         console.log(`sending ${text}`)
         const res = await api.put(`http://localhost:5000/api/${category}/${title}`, { text })
+        await updateSubItems(category, title)
         console.log(res)
         back()
     }
