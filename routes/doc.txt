@@ -1,0 +1,24 @@
+
+GET '/' : 
+returns everything in the database
+
+POST '/:category' : 
+creates a category and save it (blank) 
+
+POST '/:category/:page' :  
+adds a blank page to category
+
+PUT '/:category/:page' :
+updates a page in a category with text 
+must send body -> 
+    { 
+        "text": _____ 
+    }
+
+GET '/:category/:page' :
+returns pages text
+
+GET '/allHeaders' :
+returns all H1 and H2 headers from all pages in all categories 
+used for sidebar to navigate to 
+

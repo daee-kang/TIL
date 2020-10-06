@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const TextSchema = new Schema({
     _id: Schema.Types.ObjectId,
-    category: { type: String, required: true },
     page: { type: String, required: true },
     text: { type: String, required: true }
 })

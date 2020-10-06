@@ -14,27 +14,29 @@ const renderer = {
 marked.use({renderer})
 //---------------------------------------------------------------------------------
 
-
-
-router.get('/data', (req, res, next) => {
+//return all
+router.get('/', (req, res, next) => {
   Category.find({})
     .then(data => res.json(data))
     .catch(next)
 })
 
-router.post('/data', async (req, res, next) => {
-  const data = await Category.find({name: req.body.name})
+//creates category
+router.post('/:category', async (req, res, next) => {
+  const { category } = req.params
+
+  const data = await Category.find({name: category})
   if(data.length != 0) {
     res.json("already exists")
     return
   }
   
-  const category = new Category({
+  const c = new Category({
     _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
+    name: category,
   })
 
-  category.save()
+  c.save()
     .then((data) => {
       console.log(data, `category ${data.name} saved`)
       res.json(data)
@@ -45,7 +47,8 @@ router.post('/data', async (req, res, next) => {
     })
 })
 
-router.post('/data/:category/:page', async (req, res, next) => {
+//add blank page to category
+router.post('/:category/:page', (req, res, next) => {
   const { category, page } = req.params
   console.log(category, page)
 
@@ -60,21 +63,59 @@ router.post('/data/:category/:page', async (req, res, next) => {
   })
 })
 
-router.get('/tabs/:category/:page', (req, res, next) => {
+//update page in category
+router.put('/:category/:page', (req, res, next) => {
   const { category, page } = req.params
   console.log(category, page)
 
-  Text.findOne({ "category": category, "page": page })
+  Category.findOne({name: category}, (err, data) => {
+    if(data === null) {
+      res.json("category doesn't exist")
+      return
+    }
+
+    console.log(data);
+    for(let i = 0; i < data.pages.length; i++) {
+      if(data.pages[i].page === page) {
+        data.pages[i].text = req.body.text
+      }
+    }
+
+    data.save()
+      .then((out) => {
+        res.json(out)
+      })
+      .catch(err => {
+        console.log(err)
+        res.json(err)
+      })
+  })
+})
+
+//return page
+router.get('/:category/:page', (req, res, next) => {
+  const { category, page } = req.params
+  console.log(category, page)
+
+  Category.findOne({ name: category, "pages.page": page })
     .then(results => {
-      console.log(results)
-      res.json(results)
+      if(results === null) {
+        res.json("not found")
+        return
+      }
+
+      for(let i = 0; i < results.pages.length; i++) {
+        if(results.pages[i].page === page) {
+          res.json(results.pages[i])
+        }
+      }
     })
     .catch(err => {
       console.log(err)
     })
 })
 
-router.get('/tabs/allHeaders', (req, res, next) => {
+router.get('/allHeaders', (req, res, next) => {
   
   Text.find({}, (err, texts) => {
     let userMap = {}
