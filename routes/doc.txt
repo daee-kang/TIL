@@ -12,7 +12,7 @@ PUT '/:category/:page' :
 updates a page in a category with text 
 must send body -> 
     { 
-        "text": _____ 
+        "text": __string___ 
     }
 
 GET '/:category/:page' :
@@ -23,9 +23,9 @@ returns all titles/pages for use in side bar
 returns data in format ->
     [
         {
-            "title": __________,
+            "title": _____string_____,
             "pages": [
-                ___________,
+                _____string______,
             ]
         }
     ]
@@ -33,4 +33,10 @@ returns data in format ->
 GET '/allHeaders' :
 returns all H1 and H2 headers from all pages in all categories 
 used for sidebar to navigate to 
+
+GET '/headers/:category/:page':
+returns all H2 and H3 headers from a page in a category ->
+    [
+        ____string____
+    ]
 
