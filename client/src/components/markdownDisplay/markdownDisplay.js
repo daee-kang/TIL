@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import api from '../../utils/api'
 import marked from 'marked'
 import Editor from '../editor/editor'
 import hljs from 'highlight.js'
 import './markdownDisplay.scss'
+import { Context } from '../../Provider'
 
 const MarkdownDisplay = (props) => {
+    const { updateCurrentSub } = useContext(Context)
     const { title, category } = props
     const [text, setText] = useState("")
 
@@ -27,9 +29,7 @@ const MarkdownDisplay = (props) => {
                 let text = res.data.text
                 marked.setOptions({
                     highlight: function(code, language) {
-                        console.log(code, language)
                         const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
-                        console.log(validLanguage)
                         return hljs.highlight(validLanguage, code).value;
                     },
                     gfm: true,
@@ -40,6 +40,8 @@ const MarkdownDisplay = (props) => {
                 setText(innerhtml)
             }
             else setText("")
+
+            updateCurrentSub.current(window.location.hash.substr(1))
         }
 
         fetch()

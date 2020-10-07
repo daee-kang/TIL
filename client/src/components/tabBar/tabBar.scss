@@ -8,7 +8,7 @@
     background-color: white;
     overflow-x: hidden;
     transition: 0.3s;
-    padding-top: 60px;
+    padding-top: 10px;
     border-right: 1px solid #eaecef;
     border-top: 1px solid #eaecef;
     top: 56px;
@@ -31,6 +31,7 @@
     text-align: left;
     outline: none;
     text-decoration: none;
+    padding:10px 20px;
 }
 
 .tab-item {
@@ -45,6 +46,8 @@
 
 .category-item {
     color: #2c3e50;
+    padding: 5px 20px;
+    
 
     &:hover {
         color: #3eaf7c;
@@ -60,5 +63,33 @@
 }
 
 .link-active {
+    color: #3eaf7c;
+    border-left: 3px solid #ffd816;
+    font-weight: 500;
+}
+
+.subcategory {
+    display: block;
+    padding: 5px 40px;
+    border-left: none !important;
+    text-decoration: none;
+    color: #2c3e50;
+    text-align: left;
+    font-size: 14px;
+
+    &:hover {
+        color: #3eaf7c;
+    }
+
+    &:active {
+        color: #3eaf7c;
+    }
+
+    @media screen and (max-width : 950px) {
+        font-size: 12px;
+      }
+}
+
+.subcategory-active {
     color: #3eaf7c;
 }

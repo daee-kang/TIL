@@ -29,6 +29,8 @@ const Provider = ({children}) => {
         updateSelected.current(incomingLink)
     }
 
+    const updateCurrentSub = useRef()
+
     return (
         <Context.Provider value = {{
             tabItems,
@@ -40,7 +42,9 @@ const Provider = ({children}) => {
 
             updateSelected,
             activeLink,
-            updateActiveLink
+            updateActiveLink,
+
+            updateCurrentSub
         }}>
             {children}
         </Context.Provider>
