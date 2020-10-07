@@ -50,11 +50,11 @@
     
 
     &:hover {
-        color: #3eaf7c;
+        color: #f07167;
     }
 
     &:active {
-        color: #3eaf7c;
+        color: #f07167;
     }
 
     @media screen and (max-width : 950px) {
@@ -63,8 +63,8 @@
 }
 
 .link-active {
-    color: #3eaf7c;
-    border-left: 3px solid #ffd816;
+    color: #f07167;
+    border-left: 3px solid #00afb9;
     font-weight: 500;
 }
 
@@ -78,11 +78,11 @@
     font-size: 14px;
 
     &:hover {
-        color: #3eaf7c;
+        color: #0081a7;
     }
 
     &:active {
-        color: #3eaf7c;
+        color: #f07167;
     }
 
     @media screen and (max-width : 950px) {
@@ -91,7 +91,7 @@
 }
 
 .subcategory-active {
-    color: #3eaf7c;
+    color: #f07167;
 }
 
 /* Style the button that is used to open and close the collapsible content */
