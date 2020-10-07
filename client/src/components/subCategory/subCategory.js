@@ -4,7 +4,7 @@ import { HashLink as Link } from 'react-router-hash-link'
 import { Context } from '../../Provider'
 
 const SubCategory = (props) => {
-    const { setCurrentSubs, updateSubItems, updateCurrentSub } = useContext(Context)
+    const { setCurrentSubs, updateSubItems, updateCurrentSub, toggleSidebar } = useContext(Context)
     const { to, category, name, selected } = props
     const [subs, setSubs] = useState([])
     const [currentSub, setCurrentSub] = useState("")
@@ -46,6 +46,7 @@ const SubCategory = (props) => {
                     return <Link 
                             smooth 
                             to={`${to}#${x}`} 
+                            onClick={() => setTimeout(() => toggleSidebar.current(false), 50)}
                             className={
                                 x == currentSub ? "subcategory-active subcategory" : "subcategory"
                             }

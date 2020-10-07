@@ -31,6 +31,8 @@ const Provider = ({children}) => {
 
     const updateCurrentSub = useRef()
 
+    const toggleSidebar = useRef()
+
     return (
         <Context.Provider value = {{
             tabItems,
@@ -44,7 +46,9 @@ const Provider = ({children}) => {
             activeLink,
             updateActiveLink,
 
-            updateCurrentSub
+            updateCurrentSub,
+
+            toggleSidebar
         }}>
             {children}
         </Context.Provider>

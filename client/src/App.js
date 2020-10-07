@@ -7,14 +7,24 @@ import TabBar from './components/tabBar/tabBar';
 import Home from './components/home/home';
 import Page from './components/page/page';
 import { Context } from './Provider'
+import { set } from 'mongoose';
 
 function App() {
-  const { setUpdateState, updateTabItems } = useContext(Context)
+  const { setUpdateState, updateTabItems, toggleSidebar } = useContext(Context)
 
   const [isLoading, setIsLoading] = useState(true)
   const [tabs, setTabs] = useState(null)
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
 
+  toggleSidebar.current = (set) => {
+    if (window.innerWidth > 680) return
+
+    if(set === undefined) {
+      setIsSidebarOpen(!isSidebarOpen)
+    } else {
+      setIsSidebarOpen(set)
+    }
+  }
   setUpdateState.current = setTabs
 
   //component did mount
@@ -35,7 +45,10 @@ function App() {
     }
 
     fetchData()
+    //add listener for resize
     window.addEventListener('resize', handleResize)
+    //resize on load
+    if (window.innerWidth <= 680) setIsSidebarOpen(false)
   }, []);
 
   const openNav = () => {
@@ -43,14 +56,13 @@ function App() {
   }
 
   if (isLoading) return (
-    <div>
-      dab on em
-    </div>
+    <>
+    </>
   );
   else
     return (
       <div className="App">
-          <Header />
+          <Header/>
           <button onClick={openNav} className="openbtn">open</button>
           <TabBar data={tabs} sidebar={isSidebarOpen} />
           <div id="main">

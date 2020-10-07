@@ -7,3 +7,28 @@
     z-index: 20;
     background-color: white;
 }
+
+.icon {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.icon-container {
+    cursor: pointer;
+    width: 1.25rem;
+    height: 1.25rem;
+    display: none;
+    position: absolute;
+    padding: .6rem;
+    top: .6rem;
+    left: 1rem;
+
+    @media screen and (max-width: 681px) {
+        display: block;
+      }
+}
+
+.site-title {
+    display: inline-block;
+}
