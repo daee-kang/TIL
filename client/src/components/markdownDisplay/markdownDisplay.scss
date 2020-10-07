@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&family=Source+Code+Pro&display=swap');
 
 #md-body {
 }
@@ -117,9 +117,14 @@ h2 {
     display: block;
     background: #2d2d2d;
     color: #cccccc;
-    font-family: Menlo, Monaco, Consolas, monospace;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 14px;
     line-height: 1.5;
     border: 1px solid #ccc;
-    padding: 10px;
+    padding: 10px 20px;
     overflow-x: auto;
+    border-radius: 15px;
+    -webkit-box-shadow: 4px 5px 35px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 5px 35px -9px rgba(0,0,0,0.75);
+    box-shadow: 4px 5px 35px -9px rgba(0,0,0,0.75);
   }

@@ -93,3 +93,42 @@
 .subcategory-active {
     color: #3eaf7c;
 }
+
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+//arrow straight up copied from reference :-p
+.arrow {
+    position: relative;
+    top: -.12em;
+    left: .5em; 
+    display: inline-block;
+    width: 0;
+    height: 0;
+}
+
+.right {
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 6px solid #ccc;
+}
+
+.down {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 6px solid #ccc;
+}

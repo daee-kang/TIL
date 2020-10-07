@@ -41,7 +41,7 @@ const MarkdownDisplay = (props) => {
             }
             else setText("")
 
-            updateCurrentSub.current(window.location.hash.substr(1))
+            //updateCurrentSub.current(window.location.hash.substr(1))
         }
 
         fetch()
