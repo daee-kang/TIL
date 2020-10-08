@@ -36,6 +36,7 @@ const Footer = (props) => {
                     elems.push(
                         <NavLink
                             className="left-link footer-link"
+                            onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
                             to={`/page/${category}/${prev}`}
                         >
                             ← {prev}
@@ -46,6 +47,7 @@ const Footer = (props) => {
                     elems.push(
                         <NavLink
                             className="right-link footer-link"
+                            onClick={() => window.scrollTo({top: 0, behavior: "smooth"})}
                             to={`/page/${category}/${next}`}
                         >
                             {next} →

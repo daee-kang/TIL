@@ -20,6 +20,14 @@ const Provider = ({children}) => {
         setCurrentSubs.current(res.data)
     }
 
+    const allSubs = useRef()
+    const updateAllSubItems = async (category, page) => {
+        const res = await api.get(`allHeaders`)
+        console.log('updated all sub items')
+        console.log(res.data)
+        allSubs.current = res.data
+    }
+
     const activeLink = useRef()
     const updateSelected = useRef()
     const updateActiveLink = (incomingLink) => {
@@ -40,6 +48,9 @@ const Provider = ({children}) => {
             
             setCurrentSubs,
             updateSubItems,
+
+            allSubs,
+            updateAllSubItems,
 
             updateSelected,
             activeLink,

@@ -8,7 +8,7 @@ import Page from './components/page/page';
 import { Context } from './Provider'
 
 function App() {
-  const { setUpdateState, updateTabItems, toggleSidebar } = useContext(Context)
+  const { setUpdateState, updateTabItems, toggleSidebar, updateAllSubItems } = useContext(Context)
 
   const [isLoading, setIsLoading] = useState(true)
   const [tabs, setTabs] = useState(null)
@@ -30,6 +30,7 @@ function App() {
     //get data on load
     const fetchData = async () => {
       await updateTabItems()
+      await updateAllSubItems()
       setIsLoading(false)
     }
 

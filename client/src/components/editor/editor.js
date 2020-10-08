@@ -5,7 +5,7 @@ import { Context } from '../../Provider'
 const Editor = (props) => {
     const { title, category, back } = props
     const [text, setText] = useState("")
-    const { updateSubItems } = useContext(Context)
+    const { updateSubItems, updateAllSubItems } = useContext(Context)
 
     useEffect(() => {
         const fetch = async () => {
@@ -29,6 +29,7 @@ const Editor = (props) => {
         console.log(`sending ${text}`)
         const res = await api.put(`${category}/${title}`, { text })
         await updateSubItems(category, title)
+        await updateAllSubItems()
         console.log(res)
         back()
     }

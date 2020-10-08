@@ -1,10 +1,87 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './header.scss'
 import { Context } from '../Provider'
+import { NavLink } from 'react-router-dom'
+import { HashLink as Link } from 'react-router-hash-link'
 
 
 const Header = (props) => {
-    const { toggleSidebar } = useContext(Context)
+    const { toggleSidebar, tabItems, allSubs } = useContext(Context)
+    const [ searchVal, setSearchVal ] = useState("");  
+    const [ searchDiv, setSearchDiv ] = useState(null);
+    
+
+    const searchHandler = (e) => {
+        setSearchVal(e.target.value)
+
+        //do search operations 
+        let results = []
+        let em = []
+
+        for(let i = 0; i < tabItems.current.length; i++) {
+            let pages = tabItems.current[i].pages
+            for(let j = 0; j < pages.length; j++) {
+                if(pages[j].includes(e.target.value)) {
+                    results.push({
+                        text: pages[j],
+                        to: `page/${tabItems.current[i].title}/${pages[j]}`
+                    })
+                }
+            }
+        }
+        results.map((result) => {
+            em.push(
+                <NavLink 
+                    to={"/" + result.to}
+                    className="search-link"
+                    onClick={() => setSearchVal("")}
+                >
+                    {result.text}
+                </NavLink>
+            )
+        }) 
+        results = []
+
+        for(let i = 0; i < allSubs.current.length; i++) {
+            let sub = allSubs.current[i]
+            
+            if(sub.text.includes(e.target.value)) {
+                results.push({
+                    text: `${sub.page} > ${sub.text}`,
+                    to: `page/${sub.category}/${sub.page}#${sub.text}`
+                })
+            }
+        }
+        results.map((result) => {
+            em.push(
+                <Link 
+                    to={"/" + result.to}
+                    className="search-link"
+                    onClick={() => setSearchVal("")}
+                >
+                    {result.text}
+                </Link>
+            )
+        }) 
+
+        if(em.length === 0) {
+            setSearchDiv(null)
+            return
+        }
+
+        setSearchDiv(
+            <div className="search-results">
+                {em}
+            </div>
+        )
+    }
+
+
+    useEffect(() => {
+        if(searchVal === "") setSearchDiv(null)
+
+        
+    }, [searchVal])
 
     return (
         <div className='header'>
@@ -13,11 +90,21 @@ const Header = (props) => {
             </div>
             <a href="/" className="site-title">daee</a>
             <div className="search-box">
-                <input autoComplete="off" spellCheck="false" />
+                <input 
+                    autoComplete="off" 
+                    spellCheck="false"
+                    value={searchVal}
+                    onChange={searchHandler} 
+                    onBlur={() => setSearchDiv(null)}
+                    onFocus={searchHandler}
+                    />
+                {/* searh results down here m8 */}
+                {searchDiv}
             </div>
             <div className="link-container">
                 <a href="https://github.com/daee-kang" className="header-link">GitHub</a>
             </div>
+
         </div>
     )
 }

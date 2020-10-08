@@ -151,28 +151,33 @@ router.get('/menuItems', (req, res, next) => {
 
 router.get('/allHeaders', (req, res, next) => {
   console.log(`GET /allHeaders`)
-  Text.find({}, (err, texts) => {
-    let userMap = {}
+  Category.find({}, (err, data) => {
+    let results = []
 
-    texts.forEach(t => {
-      let markedText = marked(t.text)
-      console.log(markedText)
-      const regExpr = /<h[12] class=\"marked\" [^>]+>(.*?)<\/h[12]>/g
-      //const regExpr = /<h[12] [^>]+>(.*?)<\/h[12]>/g
+    for(let i = 0; i < data.length; i++) {
+      console.log(data[i]);
 
-      let m
-      let regArray = []
-      do {
-        m = regExpr.exec(markedText)
-        if (m) {
-          regArray.push(m[1])
-        }
-      } while (m)
+      for(let j = 0; j < data[i].pages.length; j++) {
+        let p = data[i].pages[j]
 
-      userMap[t._id] = regArray
-    })
-
-    res.send(userMap)
+        let markedText = marked(p.text)
+        const regExpr = /<h[23] class=\"marked\" [^>]+>(.*?)<\/h[23]>/g
+        //const regExpr = /<h[12] [^>]+>(.*?)<\/h[12]>/g
+        let m
+        do {
+          m = regExpr.exec(markedText)
+          if (m) {
+            results.push({
+              category: data[i].name, 
+              page: data[i].pages[j].page, 
+              text: m[1]
+            })
+          }
+        } while (m)
+      }
+    }
+    res.json(results)
+    return
   })
 })
 

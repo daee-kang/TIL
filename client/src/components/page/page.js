@@ -35,8 +35,8 @@ const Page = (props) => {
         } else {
             return (
                 <div>
-                <button onClick={handleEditButton}>dab</button>
                     <MarkdownDisplay title={title} category={category} />
+                    <button onClick={handleEditButton}>edit</button>
                 </div>
             )
         }

@@ -22,6 +22,7 @@ h1 {
     border-bottom: 17px solid $primary2;
     word-break: keep-all;
     font-size: 4.5rem;
+    margin-top: 10px;
 
     @media screen and (max-width : 950px) {
       font-size: 3.5rem;

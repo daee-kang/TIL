@@ -30,7 +30,10 @@ const SubCategory = (props) => {
                 to={to}
                 activeClassName="link-active"
                 className="sidebar-item category-item"
-                onClick={() => setTimeout(() => toggleSidebar.current(false), 50)}
+                onClick={() => {
+                    setTimeout(() => toggleSidebar.current(false), 50)
+                    window.scrollTo({top: 0, behavior: "smooth"})
+                }}
             >
                 {name}
             </NavLink>
