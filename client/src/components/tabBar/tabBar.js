@@ -6,7 +6,7 @@ import './tabBar.scss'
 import { Context } from '../../Provider'
 
 const TabBar = (props) => {
-    const { updateSelected, subItems, updateSubItems, activeLink } = useContext(Context)
+    const { updateSelected } = useContext(Context)
     const [ selected, setSelected ] = useState("") //this is handled in provider
     updateSelected.current = setSelected //sending the statesetter in provider
     //all of this is updated when page.js is rendered
@@ -16,12 +16,13 @@ const TabBar = (props) => {
 
     })
 
+    //handle collapsing on click
     const collapse = (e) => {
         //handle if we click on the arrow
         if(e.target.tagName === "SPAN") {
             e.target = e.target.parentElement
         }
-
+        
         e.target.classList.toggle("active")
         let content = e.target.nextElementSibling
 

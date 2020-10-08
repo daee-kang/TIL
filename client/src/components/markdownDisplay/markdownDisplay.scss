@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Source+Code+Pro&display=swap');
+@import '../../constants.scss';
 
 #md-body {
-  color: #2c3e50;
+  color: $text-color;
 }
 
 #md-content {
@@ -16,11 +17,15 @@
 
 h1 {
     font-family: 'Lobster', cursive;
-    color: #2c3e50;
+    color: $text-color;
     font-weight: 500;
-    border-bottom: 17px solid #00afb9;
+    border-bottom: 17px solid $primary2;
     word-break: keep-all;
     font-size: 4.5rem;
+
+    @media screen and (max-width : 950px) {
+      font-size: 3.5rem;
+    }
 }
 
 h2 {
@@ -29,8 +34,12 @@ h2 {
     font-weight: 600;
     line-height: 1.25;
 
-    color: #2c3e50;
+    color: $text-color;
     border-bottom: 1px solid #eaecef;
+
+    @media screen and (max-width: 950px) {
+      font-size: 1.5rem;
+    }
 }
 
 /* Dracula Theme v1.2.5
@@ -45,31 +54,43 @@ h2 {
  * @author Zeno Rocha <hi@zenorocha.com>
  */
 
+  //colors for editor
+  $terminal-bg: #282a36;
+  $terminal-secondary1: #8be9fd;
+  $terminal-secondary2:#f8f8f2;
+  $terminal-secondary3: #6272a4;
+  $terminal-primary1: #ff79c6;
+  $terminal-primary2: #50fa7b;
+  $terminal-primary3: #f1fa8c;
+  $terminal-primary4: #bd93f9;
+
+
+
  .hljs {
     display: block;
     overflow-x: auto;
     padding: 0.5em;
-    background: #282a36;
+    background: $terminal-bg;
   }
   
   .hljs-built_in,
   .hljs-selector-tag,
   .hljs-section,
   .hljs-link {
-    color: #8be9fd;
+    color: $terminal-secondary1;
   }
   
   .hljs-keyword {
-    color: #ff79c6;
+    color: $terminal-primary1;
   }
   
   .hljs,
   .hljs-subst {
-    color: #f8f8f2;
+    color: $terminal-secondary2;
   }
   
   .hljs-title {
-    color: #50fa7b;
+    color: $terminal-primary2;
   }
   
   .hljs-string,
@@ -83,13 +104,13 @@ h2 {
   .hljs-variable,
   .hljs-template-tag,
   .hljs-template-variable {
-    color: #f1fa8c;
+    color: $terminal-primary3;
   }
   
   .hljs-comment,
   .hljs-quote,
   .hljs-deletion {
-    color: #6272a4;
+    color: $terminal-secondary3;
   }
   
   .hljs-keyword,
@@ -101,12 +122,12 @@ h2 {
   .hljs-type,
   .hljs-name,
   .hljs-strong {
-    font-weight: bold;
+    //font-weight: bold;
   }
   
   .hljs-literal,
   .hljs-number {
-    color: #bd93f9;
+    color: $terminal-primary4;
   }
   
   .hljs-emphasis {
@@ -119,8 +140,8 @@ h2 {
     background: #2d2d2d;
     color: #cccccc;
     font-family: 'Source Code Pro', monospace;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: .6rem;
+    line-height: 1.8;
     border: 1px solid #ccc;
     padding: 10px 20px;
     overflow-x: auto;

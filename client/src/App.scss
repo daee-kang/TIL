@@ -1,6 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&display=swap');
 
 body{
   margin: 0;
@@ -8,17 +6,8 @@ body{
   font-family: 'Inconsolata', monospace;
 }
 
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-
-  @media screen and (min-width: 681px) {
-    display: none;
-  }
+.App {
+  text-align: center;
 }
 
 

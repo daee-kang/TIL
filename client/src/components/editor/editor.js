@@ -9,7 +9,7 @@ const Editor = (props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            const res = await api.get(`http://localhost:5000/api/${category}/${title}`)
+            const res = await api.get(`${category}/${title}`)
             if(res.data != undefined) {
                 let text = res.data.text
                 setText(text)
@@ -27,7 +27,7 @@ const Editor = (props) => {
 
     const save = async (e) => {
         console.log(`sending ${text}`)
-        const res = await api.put(`http://localhost:5000/api/${category}/${title}`, { text })
+        const res = await api.put(`${category}/${title}`, { text })
         await updateSubItems(category, title)
         console.log(res)
         back()

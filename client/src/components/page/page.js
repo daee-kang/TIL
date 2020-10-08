@@ -1,6 +1,4 @@
 import React, { useState, useEffect, createRef, useRef, useCallback, useContext } from 'react'
-import api from '../../utils/api'
-import marked from 'marked'
 import Editor from '../editor/editor'
 import MarkdownDisplay from '../markdownDisplay/markdownDisplay'
 import './page.scss'

@@ -14,18 +14,10 @@ const SubCategory = (props) => {
             if (selected === to) {
                 setCurrentSubs.current = setSubs
                 await updateSubItems(category, name)
-
-                console.log(window.location.hash)
             }
         }
-        updateCurrentSub.current = setCurrentSub
         f()
-        console.log(htmlDecode(props.location))
     }, [selected])
-
-    useEffect(() => {
-        console.log(currentSub)
-    }, [currentSub])
 
     const htmlDecode = (input) => {
         var doc = new DOMParser().parseFromString(input, "text/html");
@@ -61,5 +53,3 @@ const SubCategory = (props) => {
 }
 
 export default SubCategory
-
-//<Link to={address} className="sidebar-item category-item">{y.category}</Link>)

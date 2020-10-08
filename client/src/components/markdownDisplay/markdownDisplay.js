@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react'
 import api from '../../utils/api'
 import marked from 'marked'
-import Editor from '../editor/editor'
 import hljs from 'highlight.js'
 import './markdownDisplay.scss'
-import { Context } from '../../Provider'
 
 const MarkdownDisplay = (props) => {
-    const { updateCurrentSub } = useContext(Context)
     const { title, category } = props
     const [text, setText] = useState("")
 
@@ -24,7 +21,7 @@ const MarkdownDisplay = (props) => {
 
     useEffect(() => {
         const fetch = async () => {
-            const res = await api.get(`http://localhost:5000/api/${category}/${title}`)
+            const res = await api.get(`${category}/${title}`)
             if (res.data != undefined) {
                 let text = res.data.text
                 marked.setOptions({
@@ -40,8 +37,6 @@ const MarkdownDisplay = (props) => {
                 setText(innerhtml)
             }
             else setText("")
-
-            //updateCurrentSub.current(window.location.hash.substr(1))
         }
 
         fetch()

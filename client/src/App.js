@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './App.scss';
-import api from './utils/api'
 import { Route, Switch } from 'react-router-dom'
 import Header from './header/header';
 import TabBar from './components/tabBar/tabBar';
 import Home from './components/home/home';
 import Page from './components/page/page';
 import { Context } from './Provider'
-import { set } from 'mongoose';
 
 function App() {
   const { setUpdateState, updateTabItems, toggleSidebar } = useContext(Context)
@@ -51,19 +49,15 @@ function App() {
     if (window.innerWidth <= 680) setIsSidebarOpen(false)
   }, []);
 
-  const openNav = () => {
-    setIsSidebarOpen(!isSidebarOpen)
-  }
-
   if (isLoading) return (
     <>
+      {/* should i put anything here lol */}
     </>
   );
   else
     return (
       <div className="App">
           <Header/>
-          <button onClick={openNav} className="openbtn">open</button>
           <TabBar data={tabs} sidebar={isSidebarOpen} />
           <div id="main">
             <Switch>
