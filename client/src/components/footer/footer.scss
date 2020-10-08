@@ -21,4 +21,7 @@
     margin: auto;
     margin-top: 100px;
     border-top: 1px solid #eaecef;
+    @media screen and (max-width : 1140px) {
+        width: 100%;
+    }
 }
