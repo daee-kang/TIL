@@ -9,8 +9,8 @@ const Provider = ({children}) => {
     const setUpdateState = useRef()
     const updateTabItems = async () => {
         const result = await api.get('menuItems')
-        console.log(result.data)
         setUpdateState.current(result.data)
+        tabItems.current = result.data
     }
 
     const setCurrentSubs = useRef()

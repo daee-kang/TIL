@@ -10,8 +10,6 @@ const TabBar = (props) => {
     const [ selected, setSelected ] = useState("") //this is handled in provider
     updateSelected.current = setSelected //sending the statesetter in provider
     //all of this is updated when page.js is rendered
-    console.log(props.data)
-
     useEffect(() => {
 
     })

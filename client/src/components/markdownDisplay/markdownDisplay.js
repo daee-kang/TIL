@@ -3,6 +3,7 @@ import api from '../../utils/api'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import './markdownDisplay.scss'
+import Footer from '../footer/footer'
 
 const MarkdownDisplay = (props) => {
     const { title, category } = props
@@ -44,8 +45,9 @@ const MarkdownDisplay = (props) => {
 
     return (
         <div id="md-body">
-            <div id="md-content" dangerouslySetInnerHTML={{ __html: text }}>
+            <div className="md-content" dangerouslySetInnerHTML={{ __html: text }}>
             </div>
+            <Footer title={title} category={category}/>
         </div>
     )
 }
