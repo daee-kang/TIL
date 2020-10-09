@@ -14,6 +14,11 @@ const Header = (props) => {
     const searchHandler = (e) => {
         setSearchVal(e.target.value)
 
+        if(e.target.value === "") {
+            setSearchDiv(null)
+            return
+        }
+
         //do search operations 
         let results = []
         let em = []
@@ -21,7 +26,7 @@ const Header = (props) => {
         for(let i = 0; i < tabItems.current.length; i++) {
             let pages = tabItems.current[i].pages
             for(let j = 0; j < pages.length; j++) {
-                if(pages[j].includes(e.target.value)) {
+                if(pages[j].includes(e.target.value.toLowerCase())) {
                     results.push({
                         text: pages[j],
                         to: `page/${tabItems.current[i].title}/${pages[j]}`
@@ -45,7 +50,7 @@ const Header = (props) => {
         for(let i = 0; i < allSubs.current.length; i++) {
             let sub = allSubs.current[i]
             
-            if(sub.text.includes(e.target.value)) {
+            if(sub.text.includes(e.target.value.toLowerCase())) {
                 results.push({
                     text: `${sub.page} > ${sub.text}`,
                     to: `page/${sub.category}/${sub.page}#${sub.text}`
@@ -95,7 +100,6 @@ const Header = (props) => {
                     spellCheck="false"
                     value={searchVal}
                     onChange={searchHandler} 
-                    onBlur={() => setSearchDiv(null)}
                     onFocus={searchHandler}
                     />
                 {/* searh results down here m8 */}
@@ -103,6 +107,9 @@ const Header = (props) => {
             </div>
             <div className="link-container">
                 <a href="https://github.com/daee-kang" className="header-link">GitHub</a>
+            </div>
+            <div className="link-container">
+                <a href="https://www.linkedin.com/in/daee-kang-270136183/" className="header-link">LinkedIn</a>
             </div>
 
         </div>

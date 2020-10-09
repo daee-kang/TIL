@@ -1,0 +1,24 @@
+@import '../../constants.scss';
+
+textarea {
+    margin: auto;
+    width: 720px;
+    height: 80vh;
+    resize: none;
+    padding: 20px;
+    font-family: 'Inconsolata', monospace;
+    box-sizing: border-box;
+    border-color: $primary2;
+    border-radius: 10px;
+
+    &:focus {
+        border-color: $primary1;
+        outline: none;
+    }
+
+    @media screen and (max-width : 1140px) {
+        width: 100%;
+    }
+}
+
+

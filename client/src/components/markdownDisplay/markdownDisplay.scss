@@ -9,9 +9,11 @@
     text-align: left;
     width: 720px;
     margin: auto;
+    box-sizing: border-box;
 
     @media screen and (max-width : 1140px) {
         width: 100%;
+        padding: 0px 20px;
     }
 }
 
