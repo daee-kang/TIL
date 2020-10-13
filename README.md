@@ -2,7 +2,7 @@
 
 A MERN web-app code notebook
 
-Recreated [VuePress](https://vuepress.vuejs.org/) entirely in React. 
+Basically a recreation of [VuePress](https://vuepress.vuejs.org/) entirely in React. 
 ![](https://github.com/daee-kang/TIL/blob/master/readmestuff/demo.gif)
 
 ## what is this??????????
