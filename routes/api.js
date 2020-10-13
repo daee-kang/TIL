@@ -161,7 +161,7 @@ router.get('/allHeaders', (req, res, next) => {
         let p = data[i].pages[j]
 
         let markedText = marked(p.text)
-        const regExpr = /<h[23] class=\"marked\" [^>]+>(.*?)<\/h[23]>/g
+        const regExpr = /<h[2] class=\"marked\" [^>]+>(.*?)<\/h[2]>/g
         //const regExpr = /<h[12] [^>]+>(.*?)<\/h[12]>/g
         let m
         do {
@@ -205,7 +205,7 @@ router.get('/headers/:category/:page', (req, res, next) => {
           return;
         }
         let markedText = marked(p.text)
-        const regExpr = /<h[23] class=\"marked\" [^>]+>(.*?)<\/h[23]>/g
+        const regExpr = /<h[2] class=\"marked\" [^>]+>(.*?)<\/h[2]>/g
         //const regExpr = /<h[12] [^>]+>(.*?)<\/h[12]>/g
         let m
         let regArray = []
