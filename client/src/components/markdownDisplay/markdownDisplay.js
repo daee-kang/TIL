@@ -23,7 +23,9 @@ const MarkdownDisplay = (props) => {
     useEffect(() => {
         const fetch = async () => {
             const res = await api.get(`${category}/${title}`)
-            if (res.data != undefined) {
+            if (res.data != "not found") {
+                console.log(res.data)
+
                 let text = res.data.text
                 marked.setOptions({
                     highlight: function(code, language) {

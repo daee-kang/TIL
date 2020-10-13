@@ -26,7 +26,7 @@ const Header = (props) => {
         for(let i = 0; i < tabItems.current.length; i++) {
             let pages = tabItems.current[i].pages
             for(let j = 0; j < pages.length; j++) {
-                if(pages[j].includes(e.target.value.toLowerCase())) {
+                if(pages[j].toLowerCase().includes(e.target.value.toLowerCase())) {
                     results.push({
                         text: pages[j],
                         to: `page/${tabItems.current[i].title}/${pages[j]}`
@@ -50,7 +50,7 @@ const Header = (props) => {
         for(let i = 0; i < allSubs.current.length; i++) {
             let sub = allSubs.current[i]
             
-            if(sub.text.includes(e.target.value.toLowerCase())) {
+            if(sub.text.toLowerCase().includes(e.target.value.toLowerCase())) {
                 results.push({
                     text: `${sub.page} > ${sub.text}`,
                     to: `page/${sub.category}/${sub.page}#${sub.text}`
