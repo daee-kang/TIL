@@ -17,9 +17,9 @@ Instead of hosting data through saving in the repository, I wanted to have it ru
 ## how to run this???????????????????????????????????
 
 The root directory will need a .env file containing: 
-DB = 'ur mongodb url here!!'
-PORT = SOMEPORTNUMBER
-CORS_ORIGINS=http://localhost:8080
+- DB = 'ur mongodb url here!!' 
+- PORT = SOMEPORTNUMBER 
+- CORS_ORIGINS=http://localhost:8080 
 
 both: 
 npm start in the root directory -> backend
