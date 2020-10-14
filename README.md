@@ -8,11 +8,13 @@ Basically a recreation of [VuePress](https://vuepress.vuejs.org/) entirely in Re
 ## what is this??????????
 
 Take notes in markdown, that's it B-) 
-Markdown text is saved in a mongodb database and when fetched, is parsed and compiled into html with [marked.js](https://marked.js.org/). 
+Markdown text is saved in a mongodb database and when fetched, is parsed and compiled into html with [marked.js](https://marked.js.org/).
+When creating subheaders in markdown, the website will automatically parse and add the subheader as a link to the sidebar and search engine. is cool man
 
 Inspired by : https://github.com/milooy/TIL
 
 Instead of hosting data through saving in the repository, I wanted to have it run through a database for ease. 
+
 
 ## how to run this???????????????????????????????????
 
