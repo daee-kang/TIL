@@ -1,7 +1,9 @@
 # TIL (Today I learned)
 
 A MERN web-app code notebook
-https://daeekang-til.netlify.app/
+https://daeekang-til.netlify.app/ 
+
+Deployed on netlify and aws lambda 
 
 Basically a recreation of [VuePress](https://vuepress.vuejs.org/) entirely in React. 
 ![](https://github.com/daee-kang/TIL/blob/master/readmestuff/demo.gif)
@@ -27,8 +29,3 @@ The root directory will need a .env file containing:
 both: 
 npm start in the root directory -> backend
 npm start in the client directory -> frontend
-
-## future stuff to do
-
-Will I put in authentication? probably not
-Will I host my backend with serverless? yeaaaaaaaaaaaaa, nawwwwwwwwwwww 
