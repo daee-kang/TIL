@@ -17,6 +17,14 @@
     }
 }
 
+img {
+  max-width: 720px;
+
+  @media screen and (max-width : 1140px) {
+    width: 100%;
+  }
+}
+
 h1 {
     font-family: 'Lobster', cursive;
     color: $text-color;
