@@ -1,7 +1,8 @@
 # TIL (Today I learned)
 
 A MERN web-app code notebook
-https://daeekang-til.netlify.app/ 
+https://daeekang-til.netlify.app/
+API is hosted on AWS lambda so there is a bit of a cold start load time
 
 Deployed on netlify and aws lambda 
 
